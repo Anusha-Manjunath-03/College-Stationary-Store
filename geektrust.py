@@ -28,7 +28,8 @@ def main():
                     actual_price = int(i[2]) * rs
                     total_cost += actual_price
                     applied_dis = (actual_price * dis)//100
-                    mytable.append([i[1],i[2],applied_dis,actual_price-applied_dis])
+                    temp = actual_price-applied_dis
+                    mytable.append([i[1],i[2],applied_dis,temp])
                     print('ITEM_ADDED')
                 else:
                     print('ERROR_QUANTITY_EXCEEDED')
@@ -39,17 +40,22 @@ def main():
                     actual_price = int(i[2]) * rs
                     total_cost += actual_price
                     applied_dis = (actual_price * dis)//100
-                    mytable.append([i[1],i[2],applied_dis,actual_price-applied_dis])
+                    temp = actual_price-applied_dis
+                    mytable.append([i[1],i[2],applied_dis,temp])
                     print('ITEM_ADDED')
                 else:
                     print('ERROR_QUANTITY_EXCEEDED')
         else:
             total_dis = 0
             total_price = 0
+            
             for i in range(1,len(mytable)):
                 total_dis += mytable[i][2]
                 total_price += mytable[i][3]
-            if total_cost > 1000:
+            if total_price >= 3000:
+                total_dis += (total_price * 5)//100
+                total_price -= (total_price * 5)//100
+            if total_cost >= 1000:
                 total_price += (total_price * 10)//100
                 print(f'TOTAL_DISCOUNT {total_dis:.2f}')
                 print(f'TOTAL_AMOUNT_TO_PAY {total_price:.2f}')
